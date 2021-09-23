@@ -4,6 +4,11 @@
   <h1>Corona-Rechner</h1>
 </a>
 
+<div class="topnav-right">
+  <a [routerLink]="['form']">Form</a>
+  <button *ngIf="!loginDisplay" (click)="login()">Login</button>
+</div>
+
 <!--<a routerLink="/cart" class="button fancy-button">-->
 <!--  <i class="material-icons">shopping_cart</i>Checkout-->
 <!--</a>-->
