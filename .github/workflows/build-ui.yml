@@ -1,0 +1,32 @@
+name: Build UI
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "ui/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up NODE
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Build with Npm
+      run: |
+          npm install
+          npm run build --prod
+      working-directory: ./ui
+    - name: Publish to Azure
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: csa-baseapp-ui
+        publish-profile: ${{ secrets.UI_PUBLISH_PROFILE }}
+        package: ui/dist

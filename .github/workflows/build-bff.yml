@@ -1,0 +1,36 @@
+name: Build BFF
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "bff/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: '11'
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    - name: Build with Maven
+      run: mvn -B clean package --file pom.xml
+      working-directory: ./bff
+    - name: Publish to Azure
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: csa-baseapp-bff
+        publish-profile: ${{ secrets.BFF_PUBLISH_PROFILE }}
+        package: bff/target/*.jar

@@ -1,0 +1,27 @@
+<div id="ipt-form"><h3>Gib hier deine Kundennummer ein</h3>
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div>
+      <br/>
+      <input id="customerId" type="text" placeholder="Zahl zwischen 1 und 100" class="form-control"
+             formControlName="customerId">
+    </div>
+    <button class="button" type="submit">Berechnen</button>
+
+  </form>
+  <div *ngIf="result">
+    <div id="customer">
+      Du bist {{result.customer?.sex}},  {{result.customer?.age}} Jahre alt und wohnst
+      im {{result.customer?.canton == "VS" ? "wunderschönen" : ""}} Kanton {{result.customer?.canton}}.
+      <i>(Kundennummer: {{result.customer?.id}})</i>
+      <br/> <br/>
+      Die Wahrscheinlichkeit, an Corona zu sterben, schätzen wir aufgrund absolut random generierten Daten wie folgt
+      ein:
+    </div>
+
+    <div id="risk">
+      <div id="risk-content">{{result.risk}}%</div>
+      <div id="risk-info" [innerHTML]="info"></div>
+    </div>
+
+  </div>
+</div>

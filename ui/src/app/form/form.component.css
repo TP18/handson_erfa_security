@@ -1,0 +1,35 @@
+#ipt-form {
+  text-align: center;
+  margin: 0 auto;
+}
+
+
+#risk {
+  background: url("../../assets/images/virus.jpg");
+  background-size: contain;
+  height: 400px;
+  width: 400px;
+  margin: auto;
+
+}
+
+#risk-content {
+  font-size: 100px;
+  color: white;
+  padding-top: 120px;
+}
+
+
+#risk-info {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  font-size: 30px;
+}
+
+
+#customer {
+  background-color: lightgrey;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
