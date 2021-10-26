@@ -6,6 +6,7 @@ import com.herkoemmlich.decision.RiskCalculationService;
 import com.herkoemmlich.decision.domain.Customer;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.logging.log4j.util.Strings;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,16 @@ public class Controller {
 
     @PostMapping(value = "/", produces = "text/plain", consumes = "application/json")
     public String calculateRisk(@RequestBody Customer customer,
-            @RequestHeader("Authorization") String authHeader) {
+            @RequestHeader(value = "Authorization", required = false) String authHeader) {
         logToken(authHeader);
         log.info("Calculating risk of customer with id={}", customer.getId());
 
         return String.valueOf(riskCalculationService.calculateRisk(customer));
     }
 
-//************************ Start Security *******************
-
     private void logToken(String authHeader) {
+        if (Strings.isEmpty(authHeader)) return;
+        
         try {
             String[] chunks = authHeader.substring(7).split("\\.");
             JSONObject json = (JSONObject) new JSONParser().parse(
@@ -47,7 +48,5 @@ public class Controller {
             log.error("Cannot parse JWT");
         }
     }
-
-//************************ End Security *******************
 
 }

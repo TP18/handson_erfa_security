@@ -9,7 +9,7 @@ import { MsalService } from '@azure/msal-angular';
 export class TopBarComponent {
 
 // Start Security
-
+/*
   title = 'hands-on-erfa-baseapp';
   isIframe = false;
   loginDisplay = false;
@@ -34,7 +34,7 @@ export class TopBarComponent {
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
-
+*/
 // End Security
 
 }

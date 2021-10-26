@@ -19,6 +19,7 @@ import com.herkoemmlich.bff.controller.exception.TokenNotReceivedException;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.logging.log4j.util.Strings;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class Controller {
     DecisionServiceRepository decisionServiceRepository;
 
 //************************ Start Security *******************
-
+/*
     @Value("${azure.token.authority}")
     private String tokenAuthority;
 
@@ -46,39 +47,38 @@ public class Controller {
 	@Value("${azure.token.clientsecret}")
 	private String clientSecret;
 
-    @Value("${azure.apim.subscription}")
-	private String apimSub;
-
 	@Value("${azure.db.scope}")
 	private String dbScope;
 
 	@Value("${azure.decision.scope}")
 	private String decisionScope;
-
+*/
 //************************ End Security *******************
 
     @PostMapping(path = "/", consumes = "text/plain", produces = "application/json")
     public CalculateResponse calculateRisk(@RequestBody String customerId,
-            @RequestHeader("Authorization") String authHeader) {
+            @RequestHeader(value = "Authorization", required = false) String authHeader) {
         logToken(authHeader);
         log.info("Calculating sterberisiko of customer with id={}", customerId);
 
         String onBehalfHeader = null;
 
 //************************ Start Security *******************
-
-        log.info("Issuing onbehalfof token for db service");
-        onBehalfHeader = getTokenOnBehalfOf(authHeader, dbScope);
-		if (onBehalfHeader == null) {
-			throw new TokenNotReceivedException();
+/*
+        if (!Strings.isEmpty(authHeader)) {
+            log.info("Issuing onbehalfof token for db service");
+            onBehalfHeader = getTokenOnBehalfOf(authHeader, dbScope);
+            if (onBehalfHeader == null) {
+                throw new TokenNotReceivedException();
+            }
         }
-        
+*/    
 //************************ End Security *******************
 
         Customer customer = null;
         try {
             customer = dbServiceRepository.getCustomer(customerId,
-                    onBehalfHeader, apimSub);
+                    onBehalfHeader);
             if (customer == null) {
                 throw new CustomerNotFoundException();
             }
@@ -88,18 +88,20 @@ public class Controller {
         }
 
 //************************ Start Security *******************
-
-        log.info("Issuing onbehalfof token for decision service");
-        onBehalfHeader = getTokenOnBehalfOf(authHeader, decisionScope);
-        if (onBehalfHeader == null) {
-            throw new TokenNotReceivedException();
+/*
+        if (!Strings.isEmpty(authHeader)) {
+            log.info("Issuing onbehalfof token for decision service");
+            onBehalfHeader = getTokenOnBehalfOf(authHeader, decisionScope);
+            if (onBehalfHeader == null) {
+                throw new TokenNotReceivedException();
+            }
         }
-
+*/
 //************************ End Security *******************       
 
         try {
             float calculatedRisk = Float.parseFloat(decisionServiceRepository.calculateRisk(customer,
-                    onBehalfHeader, apimSub));
+                    onBehalfHeader));
             log.info("calculated risk={} for customer with id={}", calculatedRisk, customerId);
 
             return new CalculateResponse(customer, calculatedRisk);
@@ -135,7 +137,7 @@ public class Controller {
     }
 
 //************************ Start Security *******************
-
+/*
     private String getTokenOnBehalfOf(String authHeader, 
                 String azureTokenScope) {
 		String assertion = authHeader.substring(7);
@@ -152,18 +154,20 @@ public class Controller {
             
             IAuthenticationResult authResult = application.acquireToken(parameters).join();
 
-            String bearer = new StringBuilder()
+            return new StringBuilder()
 				    .append("Bearer").append(" ")
 				    .append(authResult.accessToken())
 				    .toString();
-
-			return bearer;
         } catch (Exception e) {
             return null;
         }
 	}
+*/
+//************************ End Security *******************
 
     private void logToken(String authHeader) {
+        if (Strings.isEmpty(authHeader)) return;
+        
         try {
             String[] chunks = authHeader.substring(7).split("\\.");
             JSONObject json = (JSONObject) new JSONParser().parse(
@@ -178,7 +182,5 @@ public class Controller {
             log.error("Cannot parse JWT");
         }
     }
-
-//************************ End Security *******************
 
 }

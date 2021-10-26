@@ -13,6 +13,5 @@ public interface DecisionServiceRepository {
     @RequestMapping(method = RequestMethod.POST, value = "/", consumes = "application/json",
             produces = "text/plain")
     String calculateRisk(@RequestBody Customer customer,
-            @RequestHeader("Authorization") String authHeader,
-            @RequestHeader("Ocp-Apim-Subscription-Key") String subscriptionHeader);
+            @RequestHeader(value = "Authorization", required = false) String authHeader);
 }

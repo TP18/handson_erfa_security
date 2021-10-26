@@ -6,6 +6,7 @@ import com.herkoemmlich.db.domain.Customer;
 import com.herkoemmlich.db.repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.logging.log4j.util.Strings;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,31 +24,29 @@ public class Controller {
 
     @GetMapping(value = "/customer/{id}", produces = "application/json")
     public Customer findById(@PathVariable("id") long id,
-            @RequestHeader("Authorization") String authHeader) {
+            @RequestHeader(value = "Authorization", required = false) String authHeader) {
         logToken(authHeader);
         log.info("Loading customer with id={}", id);
 
         return customerRepository.findById(id).orElse(null);
     }
 
-//************************ Start Security *******************
+    private void logToken(String authHeader) {
+        if (Strings.isEmpty(authHeader)) return;
+        
+        try {
+            String[] chunks = authHeader.substring(7).split("\\.");
+            JSONObject json = (JSONObject) new JSONParser().parse(
+                    new String(Base64.getDecoder().decode(chunks[1])));
 
-private void logToken(String authHeader) {
-    try {
-        String[] chunks = authHeader.substring(7).split("\\.");
-        JSONObject json = (JSONObject) new JSONParser().parse(
-                new String(Base64.getDecoder().decode(chunks[1])));
-
-        String subject = (String) json.get("upn");
-        String client = (String) json.get("appid");
-        String audience = (String) json.get("aud");
-        log.info("Got token with subject={} and client={} for audience={}",
-                subject, client, audience);
-    } catch (Exception e) {
-        log.error("Cannot parse JWT");
+            String subject = (String) json.get("upn");
+            String client = (String) json.get("appid");
+            String audience = (String) json.get("aud");
+            log.info("Got token with subject={} and client={} for audience={}",
+                    subject, client, audience);
+        } catch (Exception e) {
+            log.error("Cannot parse JWT");
+        }
     }
-}
-
-//************************ End Security *******************
 
 }

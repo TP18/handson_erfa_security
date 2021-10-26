@@ -24,10 +24,13 @@ public class JpaConfig {
     @Value("classpath:db-passwort.txt")
     private Resource dbPasswort;
 
+    @Value("${ipt.datasource.driver}")
+    private String driver;
+
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.postgresql.Driver");
+        dataSourceBuilder.driverClassName(driver);
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
         dataSourceBuilder.password(getBase64DecodedPassword());

@@ -12,6 +12,5 @@ public interface DbServiceRepository {
 
     @RequestMapping(method = RequestMethod.GET, value = "/customer/{id}", consumes = "applicaton/json")
     Customer getCustomer(@PathVariable(value = "id") String customerId,
-            @RequestHeader("Authorization") String authHeader,
-            @RequestHeader("Ocp-Apim-Subscription-Key") String subscriptionHeader);
+            @RequestHeader(value = "Authorization", required = false) String authHeader);
 }

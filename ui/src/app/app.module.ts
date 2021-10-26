@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { MsalGuard, MsalInterceptor, MsalRedirectComponent, MsalModule } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
+// Remove when activating Security
+import {RouterModule} from '@angular/router';
+// Done remove
 
 @NgModule({
   imports: [
@@ -18,14 +21,20 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
     HttpClientModule,
     ReactiveFormsModule,
 
-// Start Security
+// Remove when activating Security
+    RouterModule.forRoot([
+      {path: '', component: FormComponent}
+    ])
+// Done remove
 
+// Start Security
+/*
     AppRoutingModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
-        clientId: 'c74fd85a-cb4f-410b-9b3d-bb81ed1c971d',
-        authority: 'https://login.microsoftonline.com/a9080dcf-8589-4cb6-a2e2-21398dc6c671',
-        redirectUri: 'https://csa-baseapp-ui.azurewebsites.net/redirect'
+        clientId: 'tbd client id from ui',
+        authority: 'tbd https://login.microsoftonline.com/ipt-tenant-id',
+        redirectUri: 'tbd redirect url from ui'
       },
       cache: {
         cacheLocation: 'localStorage'
@@ -33,12 +42,12 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
     }), {
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
       authRequest: {
-        scopes: ['api://35834eab-1ffd-45d3-90a7-0f2a4948740e/Call.Calculate']
+        scopes: ['tbd scope from bff']
       }
     }, {
       interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
       protectedResourceMap: new Map([ 
-          ['https://csa-apim.azure-api.net/csa-baseapp-bff', ['api://35834eab-1ffd-45d3-90a7-0f2a4948740e/Call.Calculate']]
+          ['tbd service url from bff', ['tbd scope from bff']]
       ])
     })
   ],
@@ -49,19 +58,18 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
       multi: true
     },
     MsalGuard
-  ],
-
+*/
 // End Security
-
+  ],
   declarations: [
     AppComponent,
     TopBarComponent,
     FormComponent,
 
 // Start Security
-
+/*
     LoginComponent
-
+*/
 // End Security
 
   ],
@@ -69,9 +77,9 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
     AppComponent,
 
 // Start Security
-
+/*
     MsalRedirectComponent
-
+*/
 // End Security
 
   ]

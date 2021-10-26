@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "https://csa-apim.azure-api.net/csa-baseapp-bff"
+  url: "http://localhost:8090"
 };
 
 /*
