@@ -16,6 +16,10 @@ const routes: Routes = [
     path: '',
     component: LoginComponent
   },
+  {
+    path: 'redirect',
+    component: LoginComponent
+  },
 ];
 
 const isIframe = window !== window.parent && !window.opener;

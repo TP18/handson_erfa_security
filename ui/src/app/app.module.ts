@@ -21,14 +21,9 @@ import {RouterModule} from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
 
-// Remove when activating Security
-    RouterModule.forRoot([
-      {path: '', component: FormComponent}
-    ])
-// Done remove
 
 // Start Security
-/*
+
     AppRoutingModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
@@ -42,11 +37,12 @@ import {RouterModule} from '@angular/router';
     }), {
       interactionType: InteractionType.Redirect, // MSAL Guard Configuration
       authRequest: {
-        scopes: ['tbd scope from bff']
+        scopes: ['user.read']
       }
     }, {
       interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
       protectedResourceMap: new Map([ 
+          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
           ['tbd service url from bff', ['tbd scope from bff']]
       ])
     })
@@ -58,7 +54,7 @@ import {RouterModule} from '@angular/router';
       multi: true
     },
     MsalGuard
-*/
+
 // End Security
   ],
   declarations: [
@@ -67,9 +63,9 @@ import {RouterModule} from '@angular/router';
     FormComponent,
 
 // Start Security
-/*
+
     LoginComponent
-*/
+
 // End Security
 
   ],
@@ -77,9 +73,9 @@ import {RouterModule} from '@angular/router';
     AppComponent,
 
 // Start Security
-/*
+
     MsalRedirectComponent
-*/
+
 // End Security
 
   ]

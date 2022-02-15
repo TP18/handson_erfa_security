@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
+import { Component, Inject } from '@angular/core';
+import { MsalGuardConfiguration, MsalService, MSAL_GUARD_CONFIG } from '@azure/msal-angular';
+import { RedirectRequest } from '@azure/msal-browser';
+
 
 @Component({
   selector: 'app-top-bar',
@@ -8,33 +10,29 @@ import { MsalService } from '@azure/msal-angular';
 })
 export class TopBarComponent {
 
-// Start Security
-/*
+  // Start Security
   title = 'hands-on-erfa-baseapp';
   isIframe = false;
-  loginDisplay = false;
+  loginDisplay = this.authService.instance.getAllAccounts().length > 0;
 
-  constructor(private authService: MsalService) { }
+  constructor(private authService: MsalService, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
 
   ngOnInit() {
     this.isIframe = window !== window.parent && !window.opener;
   }
 
   login() {
-    this.authService.loginPopup()
-      .subscribe({
-        next: (result) => {
-          console.log(result);
-          this.setLoginDisplay();
-        },
-        error: (error) => console.log(error)
-      });
+    if (this.msalGuardConfig.authRequest) {
+      this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+    } else {
+      this.authService.loginRedirect();
+    }
+    this.setLoginDisplay();
   }
 
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
-*/
-// End Security
+  // End Security
 
 }
