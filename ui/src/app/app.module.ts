@@ -11,9 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { MsalGuard, MsalInterceptor, MsalRedirectComponent, MsalModule } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 
+// Start Security 01
 // Remove when activating Security
+
 import {RouterModule} from '@angular/router';
-// Done remove
+
+// End Security 01 
 
 @NgModule({
   imports: [
@@ -21,62 +24,75 @@ import {RouterModule} from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
 
+// Start Security 02
+// Remove when activating Security
 
-// Start Security
+    RouterModule.forRoot([
+      {path: '', component: FormComponent}
+    ])
 
-    AppRoutingModule,
-    MsalModule.forRoot( new PublicClientApplication({
-      auth: {
-        clientId: 'tbd client id from ui',
-        authority: 'tbd https://login.microsoftonline.com/ipt-tenant-id',
-        redirectUri: 'tbd redirect url from ui'
-      },
-      cache: {
-        cacheLocation: 'localStorage'
-      }
-    }), {
-      interactionType: InteractionType.Redirect, // MSAL Guard Configuration
-      authRequest: {
-        scopes: ['user.read']
-      }
-    }, {
-      interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
-      protectedResourceMap: new Map([ 
-          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
-          ['tbd service url from bff', ['tbd scope from bff']]
-      ])
-    })
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
-      multi: true
-    },
-    MsalGuard
+// End Security 02 
 
-// End Security
+// Start Security 03
+// Remove comments when activating Security
+
+//
+//    AppRoutingModule,
+//    MsalModule.forRoot( new PublicClientApplication({
+//      auth: {
+//        clientId: '',
+//        authority: 'https://login.microsoftonline.com/a9080dcf-8589-4cb6-a2e2-21398dc6c671',
+//        redirectUri: ''
+//      },
+//      cache: {
+//        cacheLocation: 'localStorage'
+//      }
+//    }), {
+//      interactionType: InteractionType.Redirect, // MSAL Guard Configuration
+//      authRequest: {
+//        scopes: ['user.read']
+//      }
+//    }, {
+//      interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
+//      protectedResourceMap: new Map([ 
+//          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
+//          ['tbd service url from bff', ['tbd scope from bff']]
+//      ])
+//    })
+//  ],
+//  providers: [
+//    {
+//      provide: HTTP_INTERCEPTORS,
+//      useClass: MsalInterceptor,
+//      multi: true
+//    },
+//    MsalGuard
+
+// End Security 03
+
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
     FormComponent,
 
-// Start Security
+// Start Security 04
+// Remove comments when activating Security
 
-    LoginComponent
+//    LoginComponent
 
-// End Security
+// End Security 04
 
   ],
   bootstrap: [
     AppComponent,
 
-// Start Security
+// Start Security 05
+// Remove comments when activating Security
 
-    MsalRedirectComponent
+//    MsalRedirectComponent
 
-// End Security
+// End Security 05
 
   ]
 })

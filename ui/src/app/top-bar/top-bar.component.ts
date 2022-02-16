@@ -10,29 +10,32 @@ import { RedirectRequest } from '@azure/msal-browser';
 })
 export class TopBarComponent {
 
-  // Start Security
-  title = 'hands-on-erfa-baseapp';
-  isIframe = false;
-  loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+  // Start Security 06
+  // Remove comments when activating Security
 
-  constructor(private authService: MsalService, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
+  // title = 'hands-on-erfa-baseapp';
+  // isIframe = false;
+  // loginDisplay = this.authService.instance.getAllAccounts().length > 0;
 
-  ngOnInit() {
-    this.isIframe = window !== window.parent && !window.opener;
-  }
+  // constructor(private authService: MsalService, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
 
-  login() {
-    if (this.msalGuardConfig.authRequest) {
-      this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
-    } else {
-      this.authService.loginRedirect();
-    }
-    this.setLoginDisplay();
-  }
+  // ngOnInit() {
+  //   this.isIframe = window !== window.parent && !window.opener;
+  // }
 
-  setLoginDisplay() {
-    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
-  }
-  // End Security
+  // login() {
+  //   if (this.msalGuardConfig.authRequest) {
+  //     this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+  //   } else {
+  //     this.authService.loginRedirect();
+  //   }
+  //   this.setLoginDisplay();
+  // }
+
+  // setLoginDisplay() {
+  //   this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+  // }
+
+  // End Security 06 
 
 }
