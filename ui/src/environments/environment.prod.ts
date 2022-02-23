@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: "tbd service url from bff"
+  url: "mbu-bff-app.azurewebsites.net"
 };

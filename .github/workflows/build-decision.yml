@@ -31,6 +31,6 @@ jobs:
     - name: Publish to Azure
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: csa-baseapp-decision
+        app-name: mbu-baseapp-decision
         publish-profile: ${{ secrets.DECISION_PUBLISH_PROFILE }}
         package: decision/target/*.jar
