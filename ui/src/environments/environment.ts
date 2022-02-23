@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: "http://mbu-bff-app.azurewebsites.net:8090"
+  url: "http://localhost:8090"
 };
 
 /*

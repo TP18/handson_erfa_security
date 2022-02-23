@@ -31,6 +31,6 @@ jobs:
     - name: Publish to Azure
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: mbu-baseapp-db
+        app-name: csa-baseapp-db
         publish-profile: ${{ secrets.DB_PUBLISH_PROFILE }}
         package: db/target/*.jar

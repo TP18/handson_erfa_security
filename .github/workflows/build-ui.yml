@@ -27,6 +27,6 @@ jobs:
     - name: Publish to Azure
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: mbu-baseapp-ui
+        app-name: csa-baseapp-ui
         publish-profile: ${{ secrets.UI_PUBLISH_PROFILE }}
         package: ui/dist
