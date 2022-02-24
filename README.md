@@ -21,3 +21,5 @@ WICHTIG: In Github Workflows App Name anpassen
 WICHTIG: Connection Strings (für UI in Code) anpassen
 
 WICHTIG: Connection Strings (für BFF als Azure Environment Variablen) anpassen
+
+TEST
