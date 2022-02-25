@@ -14,9 +14,9 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 // Start Security 01
 // Remove when activating Security
 
-import {RouterModule} from '@angular/router';
+//import {RouterModule} from '@angular/router';
 
-// End Security 01 
+// End Security 01
 
 @NgModule({
   imports: [
@@ -27,46 +27,46 @@ import {RouterModule} from '@angular/router';
 // Start Security 02
 // Remove when activating Security
 
-    RouterModule.forRoot([
-      {path: '', component: FormComponent}
-    ])
+//     RouterModule.forRoot([
+//       {path: '', component: FormComponent}
+//     ])
 
-// End Security 02 
+// End Security 02
 
 // Start Security 03
 // Remove comments when activating Security
 
-//
-//    AppRoutingModule,
-//    MsalModule.forRoot( new PublicClientApplication({
-//      auth: {
-//        clientId: '',
-//        authority: 'https://login.microsoftonline.com/a9080dcf-8589-4cb6-a2e2-21398dc6c671',
-//        redirectUri: ''
-//      },
-//      cache: {
-//        cacheLocation: 'localStorage'
-//      }
-//    }), {
-//      interactionType: InteractionType.Redirect, // MSAL Guard Configuration
-//      authRequest: {
-//        scopes: ['user.read']
-//      }
-//    }, {
-//      interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
-//      protectedResourceMap: new Map([ 
-//          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
-//          ['tbd service url from bff', ['tbd scope from bff']]
-//      ])
-//    })
-//  ],
-//  providers: [
-//    {
-//      provide: HTTP_INTERCEPTORS,
-//      useClass: MsalInterceptor,
-//      multi: true
-//    },
-//    MsalGuard
+
+   AppRoutingModule,
+   MsalModule.forRoot( new PublicClientApplication({
+     auth: {
+       clientId: '',
+       authority: 'https://login.microsoftonline.com/a9080dcf-8589-4cb6-a2e2-21398dc6c671',
+       redirectUri: ''
+     },
+     cache: {
+       cacheLocation: 'localStorage'
+     }
+   }), {
+     interactionType: InteractionType.Redirect, // MSAL Guard Configuration
+     authRequest: {
+       scopes: ['user.read']
+     }
+   }, {
+     interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
+     protectedResourceMap: new Map([
+         ['https://graph.microsoft.com/v1.0/me', ['user.read']],
+         ['tbd service url from bff', ['tbd scope from bff']]
+     ])
+   })
+ ],
+ providers: [
+   {
+     provide: HTTP_INTERCEPTORS,
+     useClass: MsalInterceptor,
+     multi: true
+   },
+   MsalGuard
 
 // End Security 03
 
@@ -79,7 +79,7 @@ import {RouterModule} from '@angular/router';
 // Start Security 04
 // Remove comments when activating Security
 
-//    LoginComponent
+    LoginComponent
 
 // End Security 04
 
@@ -90,7 +90,7 @@ import {RouterModule} from '@angular/router';
 // Start Security 05
 // Remove comments when activating Security
 
-//    MsalRedirectComponent
+    MsalRedirectComponent
 
 // End Security 05
 
