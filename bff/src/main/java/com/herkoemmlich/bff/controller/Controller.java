@@ -37,7 +37,7 @@ public class Controller {
     DecisionServiceRepository decisionServiceRepository;
 
 //************************ Start Security *******************
-/*
+
     @Value("${azure.token.authority}")
     private String tokenAuthority;
 
@@ -52,7 +52,7 @@ public class Controller {
 
 	@Value("${azure.decision.scope}")
 	private String decisionScope;
-*/
+
 //************************ End Security *******************
 
     @PostMapping(path = "/", consumes = "text/plain", produces = "application/json")
