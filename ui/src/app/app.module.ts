@@ -50,7 +50,7 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
    }), {
      interactionType: InteractionType.Redirect, // MSAL Guard Configuration
      authRequest: {
-       scopes: ['user.read']
+       scopes: ['write.all']
      }
    }, {
      interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
