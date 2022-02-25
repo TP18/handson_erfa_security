@@ -31,7 +31,7 @@ jobs:
     - name: Publish to Azure
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: tpe-bff-app2
+        app-name: tpe-bff-app
         publish-profile: ${{ secrets.BFF_PUBLISH_PROFILE }}
         package: bff/target/*.jar
 
