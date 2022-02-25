@@ -31,6 +31,8 @@ jobs:
     - name: Publish to Azure
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: csa-baseapp-bff
+        app-name: tpe-bff-app
         publish-profile: ${{ secrets.BFF_PUBLISH_PROFILE }}
         package: bff/target/*.jar
+
+        git remote add tp18 git@github.com:tp18/handson_erfa_security.git
