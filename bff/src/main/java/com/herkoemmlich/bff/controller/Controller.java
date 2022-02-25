@@ -64,7 +64,7 @@ public class Controller {
         String onBehalfHeader = null;
 
 //************************ Start Security *******************
-/*
+
         if (!Strings.isEmpty(authHeader)) {
             log.info("Issuing onbehalfof token for db service");
             onBehalfHeader = getTokenOnBehalfOf(authHeader, dbScope);
@@ -72,7 +72,7 @@ public class Controller {
                 throw new TokenNotReceivedException();
             }
         }
-*/    
+
 //************************ End Security *******************
 
         Customer customer = null;
@@ -88,7 +88,7 @@ public class Controller {
         }
 
 //************************ Start Security *******************
-/*
+
         if (!Strings.isEmpty(authHeader)) {
             log.info("Issuing onbehalfof token for decision service");
             onBehalfHeader = getTokenOnBehalfOf(authHeader, decisionScope);
@@ -96,7 +96,7 @@ public class Controller {
                 throw new TokenNotReceivedException();
             }
         }
-*/
+
 //************************ End Security *******************       
 
         try {
@@ -137,7 +137,7 @@ public class Controller {
     }
 
 //************************ Start Security *******************
-/*
+
     private String getTokenOnBehalfOf(String authHeader, 
                 String azureTokenScope) {
 		String assertion = authHeader.substring(7);
@@ -162,7 +162,7 @@ public class Controller {
             return null;
         }
 	}
-*/
+
 //************************ End Security *******************
 
     private void logToken(String authHeader) {
