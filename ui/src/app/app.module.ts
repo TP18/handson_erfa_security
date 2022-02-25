@@ -40,9 +40,9 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
    AppRoutingModule,
    MsalModule.forRoot( new PublicClientApplication({
      auth: {
-       clientId: '',
+       clientId: 'bae89acd-224f-40b8-a0cf-9904bda64849',
        authority: 'https://login.microsoftonline.com/a9080dcf-8589-4cb6-a2e2-21398dc6c671',
-       redirectUri: ''
+       redirectUri: 'https://tpe-ui-app.azurewebsites.net'
      },
      cache: {
        cacheLocation: 'localStorage'
@@ -56,7 +56,7 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
      interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
      protectedResourceMap: new Map([
          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
-         ['tbd service url from bff', ['tbd scope from bff']]
+         ['https://tpe-bff-app.azurewebsites.net', ['api://1e7dc472-262c-42a1-9b4f-83b1a98e3d0e/Call.Calculate']]
      ])
    })
  ],

@@ -13,29 +13,29 @@ export class TopBarComponent {
   // Start Security 06
   // Remove comments when activating Security
 
-  // title = 'hands-on-erfa-baseapp';
-  // isIframe = false;
-  // loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+  title = 'hands-on-erfa-baseapp';
+  isIframe = false;
+  loginDisplay = this.authService.instance.getAllAccounts().length > 0;
 
-  // constructor(private authService: MsalService, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
+  constructor(private authService: MsalService, @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration) { }
 
-  // ngOnInit() {
-  //   this.isIframe = window !== window.parent && !window.opener;
-  // }
+  ngOnInit() {
+    this.isIframe = window !== window.parent && !window.opener;
+  }
 
-  // login() {
-  //   if (this.msalGuardConfig.authRequest) {
-  //     this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
-  //   } else {
-  //     this.authService.loginRedirect();
-  //   }
-  //   this.setLoginDisplay();
-  // }
+  login() {
+    if (this.msalGuardConfig.authRequest) {
+      this.authService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+    } else {
+      this.authService.loginRedirect();
+    }
+    this.setLoginDisplay();
+  }
 
-  // setLoginDisplay() {
-  //   this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
-  // }
+  setLoginDisplay() {
+    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+  }
 
-  // End Security 06 
+  // End Security 06
 
 }
