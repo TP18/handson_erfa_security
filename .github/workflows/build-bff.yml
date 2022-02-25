@@ -34,5 +34,3 @@ jobs:
         app-name: tpe-bff-app
         publish-profile: ${{ secrets.BFF_PUBLISH_PROFILE }}
         package: bff/target/*.jar
-
-        git remote add tp18 git@github.com:tp18/handson_erfa_security.git
